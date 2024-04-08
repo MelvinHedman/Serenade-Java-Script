@@ -214,3 +214,13 @@ serenade.app("JetBrains").command("set value of <%type%> <%variable%> to <%value
 
 
 // Create constructor
+serenade.language("java").snippet(
+  "override function <%public%> <%variable%> <%name%>",
+  "@Override<%newline%><%public%> <%variable%> <%name%> () {<%newline%><%cursor%><%newline%>}",
+  {
+    "name": ["pascal", "identifier"],
+    "extends": ["pascal", "identifier"],
+    "implements": ["pascal", "identifier"]
+  },
+  "class"
+);
