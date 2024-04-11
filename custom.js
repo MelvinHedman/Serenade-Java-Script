@@ -7,7 +7,7 @@ serenade.app("JetBrains").command("tooltip", async (api) => {
   await api.pressKey("", ["alt", "enter"]);
 });
 
-serenade.app("JetBrains").command("new package <%packagename%>", async (api, matches) => {
+serenade.app("JetBrains").command("create package <%packagename%>", async (api, matches) => {
   await api.pressKey(newDirectoryCommand, ["alt", "control"]);
   await api.typeText(matches.packagename)
   await api.pressKey("enter", [])
@@ -20,7 +20,7 @@ serenade.app("JetBrains").command("file select", async (api, matches) => {
 
 
 // Create a class
-serenade.app("JetBrains").command("new class <%classname%>", async (api, matches) => {
+serenade.app("JetBrains").command("create class <%classname%>", async (api, matches) => {
   await api.pressKey(newFileCommand, ["alt", "control"]);
   classname = matches.classname.charAt(0).toUpperCase() + matches.classname.slice(1);
   await api.typeText(classname)
@@ -30,7 +30,7 @@ serenade.app("JetBrains").command("new class <%classname%>", async (api, matches
 });
 
 // Create an abstract class
-serenade.app("JetBrains").command("new abstract class <%classname%>", async (api, matches) => {
+serenade.app("JetBrains").command("create abstract class <%classname%>", async (api, matches) => {
   await api.pressKey(newFileCommand, ["alt", "control"]);
   classname = matches.classname.charAt(0).toUpperCase() + matches.classname.slice(1);
   await api.typeText(classname)
@@ -114,7 +114,7 @@ async function implementClass(api, matches) {
   await api.delay(200)
 }
 
-serenade.app("JetBrains").command("new class <%classname%> extends <%superclass%>" , async (api, matches) => {
+serenade.app("JetBrains").command("create class <%classname%> extends <%superclass%>" , async (api, matches) => {
   await api.pressKey(newFileCommand, ["alt", "control"]);
   classname = matches.classname.charAt(0).toUpperCase() + matches.classname.slice(1);
   await api.typeText(classname)
@@ -139,7 +139,7 @@ serenade.app("JetBrains").command("extend class <%classname%> with <%superclass%
 
 // Define an interface
 // Implement Interface
-serenade.app("JetBrains").command("new interface <%classname%>", async (api, matches) => {
+serenade.app("JetBrains").command("create interface <%classname%>", async (api, matches) => {
   await api.pressKey(newFileCommand, ["alt", "control"]);
   classname = matches.classname.charAt(0).toUpperCase() + matches.classname.slice(1);
   await api.typeText(classname)
@@ -150,7 +150,7 @@ serenade.app("JetBrains").command("new interface <%classname%>", async (api, mat
   await api.pressKey("enter", [])
 });
 
-serenade.app("JetBrains").command("new class <%classname%> implements <%interfacename%>" , async (api, matches) => {
+serenade.app("JetBrains").command("create class <%classname%> implements <%interfacename%>" , async (api, matches) => {
   await api.pressKey(newFileCommand, ["alt", "control"]);
   classname = matches.classname.charAt(0).toUpperCase() + matches.classname.slice(1);
   await api.typeText(classname)
@@ -171,7 +171,7 @@ serenade.app("JetBrains").command("new class <%classname%> implements <%interfac
 // Use the final keyword to declare a constant value in a class
 
 // Create ENUM 
-serenade.app("JetBrains").command("new enum <%classname%>", async (api, matches) => {
+serenade.app("JetBrains").command("create enum <%classname%>", async (api, matches) => {
   await api.pressKey(newFileCommand, ["alt", "control"]);
   classname = matches.classname.toUpperCase();
   await api.typeText(classname)
@@ -214,13 +214,82 @@ serenade.app("JetBrains").command("set value of <%type%> <%variable%> to <%value
 
 
 // Create constructor
+
 serenade.language("java").snippet(
   "override function <%public%> <%variable%> <%name%>",
   "@Override<%newline%><%public%> <%variable%> <%name%> () {<%newline%><%cursor%><%newline%>}",
   {
     "name": ["pascal", "identifier"],
-    "extends": ["pascal", "identifier"],
-    "implements": ["pascal", "identifier"]
+    "public": ["pascal", "identifier"],
+    "variable": ["pascal", "identifier"]
   },
   "class"
 );
+
+serenade.language("java").snippet(
+  "loop <%name%> <%start%> equal to <%range%>",
+  "for(int <%name%> = <%start%>; <%name%> == <%range%>; <%name%>++) {<%cursor%>}",
+  {
+    "name": ["pascal", "identifier"],
+    "public": ["pascal", "identifier"],
+    "variable": ["pascal", "identifier"]
+  },
+  "class"
+);
+
+serenade.language("java").snippet(
+  "loop <%name%> <%start%> less or equal to <%range%>",
+  "for(int <%name%> = <%start%>; <%name%> <= <%range%>; <%name%>++) {<%cursor%>}",
+  {
+    "name": ["pascal", "identifier"],
+    "public": ["pascal", "identifier"],
+    "variable": ["pascal", "identifier"]
+  },
+  "class"
+);
+
+serenade.language("java").snippet(
+  "loop <%name%> <%start%> less or equal to <%range%>",
+  "for(int <%name%> = <%start%>; <%name%> >= <%range%>; <%name%>++) {<%cursor%>}",
+  {
+    "name": ["pascal", "identifier"],
+    "public": ["pascal", "identifier"],
+    "variable": ["pascal", "identifier"]
+  },
+  "class"
+);
+
+
+serenade.language("java").snippet(
+  "loop negative <%name%> <%start%> equal to <%range%>",
+  "for(int <%name%> = <%start%>; <%name%> == <%range%>; <%name%>--) {<%cursor%>}",
+  {
+    "name": ["pascal", "identifier"],
+    "public": ["pascal", "identifier"],
+    "variable": ["pascal", "identifier"]
+  },
+  "class"
+);
+
+serenade.language("java").snippet(
+  "loop negative <%name%> <%start%> less or equal to <%range%>",
+  "for(int <%name%> = <%start%>; <%name%> <= <%range%>; <%name%>--) {<%cursor%>}",
+  {
+    "name": ["pascal", "identifier"],
+    "public": ["pascal", "identifier"],
+    "variable": ["pascal", "identifier"]
+  },
+  "class"
+);
+
+serenade.language("java").snippet(
+  "loop negative <%name%> <%start%> less or equal to <%range%>",
+  "for(int <%name%> = <%start%>; <%name%> >= <%range%>; <%name%>--) {<%cursor%>}",
+  {
+    "name": ["pascal", "identifier"],
+    "public": ["pascal", "identifier"],
+    "variable": ["pascal", "identifier"]
+  },
+  "class"
+);
+
