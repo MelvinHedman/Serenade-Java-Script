@@ -42,14 +42,6 @@ serenade.app("JetBrains").command("create abstract class <%classname%>", async (
 
 // Create an object
 
-
-// Define constrtuctor in a class
-// _--_ Finns i vanliga serenade en smidig?
-
-
-// Add private members to a class and public getter and setter methods
-// Tooltip?
-
 // Make a class abstract
 async function convertClassToAbstract(api, matches){
   await api.delay(200)
@@ -130,15 +122,7 @@ serenade.app("JetBrains").command("extend class <%classname%> with <%superclass%
   await api.pressKey("enter", ["control", "right"])
 });
 
-// Define two abstract methods in an abstract class
-// Finns väldigt bra "create function public abstract voice makeSound tex."
 
-// Override two methods in a subclass of an abstract class
-// Använda tooltip? 
-
-
-// Define an interface
-// Implement Interface
 serenade.app("JetBrains").command("create interface <%classname%>", async (api, matches) => {
   await api.pressKey(newFileCommand, ["alt", "control"]);
   classname = matches.classname.charAt(0).toUpperCase() + matches.classname.slice(1);
@@ -161,16 +145,7 @@ serenade.app("JetBrains").command("create class <%classname%> implements <%inter
   await api.pressKey("enter", [])
 });
 
-// Use superclass reference to refer to a subclass object and calling overridden methods
-// Använda tooltip?
 
-// Add a static method in a class
-
-// Add a static variable in a class
-
-// Use the final keyword to declare a constant value in a class
-
-// Create ENUM 
 serenade.app("JetBrains").command("create enum <%classname%>", async (api, matches) => {
   await api.pressKey(newFileCommand, ["alt", "control"]);
   classname = matches.classname.toUpperCase();
@@ -184,13 +159,7 @@ serenade.app("JetBrains").command("create enum <%classname%>", async (api, match
   await api.pressKey("enter", [])
 });
 
-// Define an ENUM with 3 constants
 
-// Use a defined ENUM in a class to represent a specific value and switch between them. 
-
-// Exception Handling 
-
-// Use a collection to store, retrieve and manipulate a group of objects. 
 
 serenade.app("JetBrains").command("set value of <%type%> <%variable%> to <%value%>", async (api, matches) => {
   await api.pressKey("f", ["ctrl"])
@@ -213,11 +182,9 @@ serenade.app("JetBrains").command("set value of <%type%> <%variable%> to <%value
 });
 
 
-// Create constructor
-
 serenade.language("java").snippet(
   "override function <%public%> <%variable%> <%name%>",
-  "@Override<%newline%><%public%> <%variable%> <%name%> () {<%newline%><%cursor%><%newline%>}",
+  "@Override<%newline%><%public%> <%variable%> <%name%> () {<%cursor%>}",
   {
     "name": ["pascal", "identifier"],
     "public": ["pascal", "identifier"],
@@ -292,4 +259,60 @@ serenade.language("java").snippet(
   },
   "class"
 );
+
+serenade.app("JetBrains").command("implement method <%name%>", async (api, matches) => {
+  await api.pressKey("i", ["ctrl"]);
+  await api.typeText("<%name%>");
+  await api.pressKey("enter", []);
+});
+
+serenade.app("JetBrains").command("implement all methods", async (api, matches) => {
+  await api.pressKey("i", ["ctrl"]);
+  await api.pressKey("a", ["ctrl"]);
+  await api.pressKey("enter", []);
+});
+
+serenade.app("JetBrains").command("create getters", async (api, matches) => {
+  api.pressKey("shift", []);
+  api.pressKey("shift", []);
+  await api.delay(100);
+  await api.typeText("getter");
+  await api.pressKey("enter", []);
+  await api.pressKey("a", ["ctrl"]);
+  await api.pressKey("enter", []);
+});
+
+
+serenade.app("JetBrains").command("create getter <%name%>", async (api, matches) => {
+  api.pressKey("shift", []);
+  api.pressKey("shift", []);
+  await api.delay(100);
+  await api.typeText("getter");
+  await api.pressKey("enter", []);
+  await api.typeText("<%name%>");
+  await api.pressKey("enter", []);
+});
+
+
+
+serenade.app("JetBrains").command("create constructor with parameters", async (api, matches) => {
+  api.pressKey("shift", []);
+  api.pressKey("shift", []);
+  await api.delay(100);
+  await api.typeText("constructor");
+  await api.pressKey("enter", []);
+  await api.pressKey("a", ["ctrl"]);
+  await api.pressKey("enter", []);
+});
+
+serenade.app("JetBrains").command("create setters", async (api, matches) => {
+  api.pressKey("shift", []);
+  api.pressKey("shift", []);
+  await api.delay(100);
+  await api.typeText("setter");
+  await api.pressKey("enter", []);
+  await api.pressKey("a", ["ctrl"]);
+  await api.delay(100);
+  await api.pressKey("enter", []);
+});
 
